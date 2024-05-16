@@ -1,0 +1,47 @@
+CREATE TABLE ROLE
+(
+	ID serial PRIMARY KEY,
+	Name varchar(255)
+)
+
+DROP TABLE ROLE;
+
+CREATE TABLE USERS 
+(
+	ID serial PRIMARY KEY, 
+	Role serial REFERENCES ROLE(ID),
+	Name varchar(255),
+	Mail text UNIQUE,
+	Password text NOT NULL
+)
+
+DROP TABLE USERS;
+
+CREATE TABLE COMMENT 
+(
+	ID serial PRIMARY KEY,
+	Author serial REFERENCES USERS(ID),
+	Report serial REFERENCES REPORT(ID),
+	Text text
+)
+
+DROP TABLE COMMENT;
+
+CREATE TABLE STATUSHISTORY 
+(
+	ID serial PRIMARY KEY,
+	Report serial REFERENCES REPORT(ID),
+	Statuses text[]
+)
+
+DROP TABLE STATUSHISTORY;
+
+CREATE TABLE REPORT 
+(
+	ID serial PRIMARY KEY,
+	Author serial REFERENCES USERS(ID),
+	Text text,
+	Titile text
+)
+
+DROP TABLE REPORT;

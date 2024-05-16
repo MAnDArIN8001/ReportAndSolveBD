@@ -1,0 +1,51 @@
+SELECT * FROM COMMENT;
+DELETE FROM COMMENT;
+
+SELECT * FROM USERS;
+DELETE FROM USERS;
+
+SELECT * FROM ROLE;
+DELETE FROM ROLE;
+
+SELECT * FROM STATUSHISTORY;
+DELETE FROM STATUSHISTORY;
+
+SELECT * FROM REPORT;
+DELETE FROM REPORT;
+
+-- Role values --
+
+INSERT INTO ROLE(name) VALUES('admin');
+INSERT INTO ROLE(name) VALUES('user');
+INSERT INTO ROLE(name) VALUES('manager');
+
+SELECT * FROM ROLE;
+
+-- Inserting values into table --
+
+CREATE SEQUENCE UserId
+START WITH 4
+INCREMENT BY 1 
+MINVALUE 4
+MAXVALUE 6
+CYCLE;
+
+CREATE OR REPLACE FUNCTION InsertValuesIntoReport()
+RETURNS VOID
+LANGUAGE plpgsql
+AS $$ 
+DECLARE 
+ i integer := 1;
+BEGIN
+	WHILE i <= 100000 LOOP
+    	CALL createnewreport(nextval('userid')::integer, 'title is: ' || CAST(i AS text), 'text is: ' || CAST(i AS text));
+    	i := i + 1;
+  	END LOOP;
+END;
+$$
+
+SELECT * FROM InsertValuesIntoReport();
+
+SELECT * FROM REPORT
+
+EXPLAIN ANALYZE SELECT text FROM REPORT WHERE text LIKE '%title is: 1%'
