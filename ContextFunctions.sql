@@ -1,7 +1,0 @@
-CREATE OR REPLACE FUNCTION CreateNewReport()
-RETURN VOID 
-LANGUAGE plpgsql
-AS $$
-BEGIN 
-END; 
-$$
