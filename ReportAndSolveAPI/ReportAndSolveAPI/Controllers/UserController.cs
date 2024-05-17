@@ -3,6 +3,8 @@ using Microsoft.AspNetCore.Mvc;
 using ReportAndSolveAPI.Models;
 using ReportAndSolveAPI.Models.DTO.User;
 using ReportAndSolveAPI.Services;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 
 namespace ReportAndSolveAPI.Controllers
 {
@@ -46,6 +48,8 @@ namespace ReportAndSolveAPI.Controllers
         {
             ServiceResponse<bool> response = await _userServices.CreateUser(newUser);
 
+            MailSender.SendTableChangedMesssage("Users", "insert");
+
             return response.Succes ? Ok(response) : NotFound(response);
         }
 
@@ -54,6 +58,8 @@ namespace ReportAndSolveAPI.Controllers
         {
             ServiceResponse<bool> response = await _userServices.UpdateUser(updatedUser);
 
+            MailSender.SendTableChangedMesssage("Users", "update");
+
             return response.Succes ? Ok(response) : NotFound(response);
         }
 
@@ -61,6 +67,8 @@ namespace ReportAndSolveAPI.Controllers
         public async Task<ActionResult<ServiceResponse<bool>>> DeleteUser(int id)
         {
             ServiceResponse<bool> response = await _userServices.DeleteUser(id);
+
+            MailSender.SendTableChangedMesssage("Users", "delete");
 
             return response.Succes ? Ok(response) : NotFound(response);
         }

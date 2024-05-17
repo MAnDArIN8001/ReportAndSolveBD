@@ -37,6 +37,8 @@ namespace ReportAndSolveAPI.Controllers
         {
             ServiceResponse<bool> response = await _commentService.CreateComment(newComment);
 
+            MailSender.SendTableChangedMesssage("Comment", "create");
+
             return response.Succes ? Ok(response) : NotFound(response);
         }
 
@@ -44,6 +46,8 @@ namespace ReportAndSolveAPI.Controllers
         public async Task<ActionResult<ServiceResponse<bool>>> DeleteComment(int id)
         {
             ServiceResponse<bool> response = await _commentService.DeleteComment(id);
+
+            MailSender.SendTableChangedMesssage("Comment", "delete");
 
             return response;
         }

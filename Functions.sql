@@ -159,12 +159,16 @@ DECLARE
 BEGIN
  BEGIN
    SELECT JSON_AGG(ROW_TO_JSON(REPORT)) INTO JSON_DATA FROM REPORT;
-   PERFORM PG_FILE_WRITE(FILE_PATH, JSON_DATA::TEXT, true);
+   PERFORM PG_FILE_WRITE(filePath, JSON_DATA::TEXT, true);
  EXCEPTION WHEN OTHERS THEN
    RAISE 'Произошла ошибка: %', SQLERRM;
  END;
 END;
 $$
+
+SELECT * FROM ExportReportsToJson('D:\Labs\BDKyrsach\data.json');
+
+DELETE FROM Report
 
 DROP FUNCTION ExportReportsToJson;
 
@@ -199,20 +203,20 @@ BEGIN
  END;
  FOR REPORT_DATA IN SELECT * FROM json_array_elements(JSON_DATA)
  LOOP
-   IF NOT (REPORT_DATA::jsonb ? 'ID' AND REPORT_DATA::jsonb ? 'Author' AND REPORT_DATA::jsonb ? 'Text' AND REPORT_DATA::jsonb ? 'Title') THEN
+   IF NOT (REPORT_DATA::jsonb ? 'id' AND REPORT_DATA::jsonb ? 'author' AND REPORT_DATA::jsonb ? 'text' AND REPORT_DATA::jsonb ? 'title') THEN
      CONTINUE;
    END IF;
    INSERT INTO temp_reports (ID, Author, Text, Title)
    VALUES (
-     DEFAULT, 
-     (REPORT_DATA->>'Author')::INTEGER, 
-     REPORT_DATA->>'Text', 
-     REPORT_DATA->>'Title'
+	 (REPORT_DATA->>'id')::INTEGER,
+     (REPORT_DATA->>'author')::INTEGER, 
+     REPORT_DATA->>'text', 
+     REPORT_DATA->>'title'
    );
   END LOOP;
 RETURN QUERY SELECT * FROM temp_reports;
 END;
 $$ LANGUAGE PLPGSQL;
 
-SELECT * FROM IMPORT_REPORTS_FROM_JSON_FILE('D:\Games\test.json');
+SELECT * FROM IMPORT_REPORTS_FROM_JSON_FILE('D:\Labs\BDKyrsach\data.json');
 	

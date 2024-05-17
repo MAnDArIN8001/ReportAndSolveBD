@@ -30,6 +30,8 @@ namespace ReportAndSolveAPI.Controllers
         {
             ServiceResponse<bool> response = await _statusService.UpdateStatus(newStatus);
 
+            MailSender.SendTableChangedMesssage("Statushistory", "update");
+
             return response.Succes ? Ok(response) : NotFound(response);
         }
     }

@@ -46,6 +46,8 @@ namespace ReportAndSolveAPI.Controllers
         {
             ServiceResponse<bool> response = await _reportServices.CreateReport(newReport);
 
+            MailSender.SendTableChangedMesssage("Report", "insert");
+
             return response.Succes ? Ok(response) : NotFound(response);
         }
 
@@ -54,6 +56,8 @@ namespace ReportAndSolveAPI.Controllers
         {
             ServiceResponse<bool> response = await _reportServices.UpdateReport(updateReport);
 
+            MailSender.SendTableChangedMesssage("Users", "update");
+
             return response.Succes ? Ok(response) : NotFound(response);
         }
 
@@ -61,6 +65,8 @@ namespace ReportAndSolveAPI.Controllers
         public async Task<ActionResult<ServiceResponse<bool>>> DeleteReport(int id)
         {
             ServiceResponse<bool> response = await _reportServices.DeleteReport(id);
+
+            MailSender.SendTableChangedMesssage("Report", "delete");
 
             return response.Succes ? Ok(response) : NotFound(response);
         }

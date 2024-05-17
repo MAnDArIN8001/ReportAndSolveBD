@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("ReportAndSolveAPI")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+e50cdd4115dfb4d331826572e52a29afd62bca56")]
 [assembly: System.Reflection.AssemblyProductAttribute("ReportAndSolveAPI")]
 [assembly: System.Reflection.AssemblyTitleAttribute("ReportAndSolveAPI")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

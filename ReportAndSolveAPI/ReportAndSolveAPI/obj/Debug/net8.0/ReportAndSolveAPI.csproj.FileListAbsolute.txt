@@ -55,3 +55,4 @@ D:\Labs\BDKyrsach\ReportAndSolveAPI\ReportAndSolveAPI\obj\Debug\net8.0\refint\Re
 D:\Labs\BDKyrsach\ReportAndSolveAPI\ReportAndSolveAPI\obj\Debug\net8.0\ReportAndSolveAPI.pdb
 D:\Labs\BDKyrsach\ReportAndSolveAPI\ReportAndSolveAPI\obj\Debug\net8.0\ReportAndSolveAPI.genruntimeconfig.cache
 D:\Labs\BDKyrsach\ReportAndSolveAPI\ReportAndSolveAPI\obj\Debug\net8.0\ref\ReportAndSolveAPI.dll
+D:\Labs\BDKyrsach\ReportAndSolveAPI\ReportAndSolveAPI\obj\Debug\net8.0\ReportAndSolveAPI.sourcelink.json
